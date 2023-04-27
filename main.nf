@@ -1,22 +1,53 @@
 #!/usr/bin/env nextflow
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    nf/nextpyrad
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Github : https://github.com/nf/nextpyrad
+----------------------------------------------------------------------------------------
+*/
 
 nextflow.enable.dsl = 2
 
-include { pyTask } from "./modules/pyTask"
-include { merge } from "./modules/merge"
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    VALIDATE & PRINT PARAMETER SUMMARY
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
 
-workflow {
-    
-    //Validate input parameters
-    assert params.input_img_mask != null : "Please specify a correct path for the input img data"
-    assert params.pattern != null : "Please specify a valid pattern to subdivide scan from segmentation"
-    input_img_mask = file(params.input_img_mask, checkIfExists: true)
-    pattern = params.pattern
-    outdir = file(params.outdir, checkIfExists: true)
-    read_img = Channel.fromFilePairs("${input_img_mask}/**/${pattern}", type: 'file').ifEmpty { exit 1, "Cannot find any input data matching"}
+// WorkflowMain.initialise(workflow, params, log)
 
-    //start workflow
-    pyTask( read_img )
-    merge( pyTask.out.rad_csv.collect() )
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    NAMED WORKFLOW FOR PIPELINE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
 
+include { NEXTPYRAD } from './workflows/nextpyrad'
+
+//
+// WORKFLOW: Run main nf/nextpyrad analysis pipeline
+//
+workflow NF_NEXTPYRAD {
+    NEXTPYRAD ()
 }
+
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    RUN ALL WORKFLOWS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+//
+// WORKFLOW: Execute a single named workflow for the pipeline
+// See: https://github.com/nf-core/rnaseq/issues/619
+//
+workflow {
+    NF_NEXTPYRAD ()
+}
+
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    THE END
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
