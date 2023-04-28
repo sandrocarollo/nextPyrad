@@ -1,0 +1,15 @@
+#   conda env create -f environment.yml
+
+name: nextpyrad
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - pandas
+  - yaml
+  - argparse
+  - pip
+  - pip:
+    - pyradiomics
+    - pyyaml
