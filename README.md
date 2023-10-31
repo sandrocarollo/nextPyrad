@@ -46,23 +46,17 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 5. Start running your own analysis!
 
    > In order to do so you should keep your data in a certain folder structure like this one:
-   >.
-    ├── ...
-    ├── test                    # Test files (alternatively `spec` or `tests`)
-    │   ├── benchmarks          # Load and stress tests
-    │   ├── integration         # End-to-end, integration tests (alternatively `e2e`)
-    │   └── unit                # Unit tests
-    └── ...
-   
-   >   Data
-   >   ├── Sample_1
-   >   │   ├── sample1_image.nrrd
-   >   │   └── sample1_seg.nrrd
-   >   ├── ...
-   >   ├── Sample_N
-   >   │   ├── sampleN_image.nrrd
-   >   │   └── sampleN_seg.nrrd
-   >   └── ...
+   ```bash
+      Data
+      ├── Sample_1
+      │   ├── sample1_image.nrrd
+      │   └── sample1_seg.nrrd
+      ├── ...
+      ├── Sample_N
+      │   ├── sampleN_image.nrrd
+      │   └── sampleN_seg.nrrd
+      └── ...
+   ```
    >
    >Note that the predifined pattern to access all the Images and the respective Masks is `*_{image,seg}.n*`, meaning that the image file should have "_image" and the mask "_seg" as a suffix.
    
