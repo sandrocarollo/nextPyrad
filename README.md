@@ -46,6 +46,14 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 5. Start running your own analysis!
 
    > In order to do so you should keep your data in a certain folder structure like this one:
+   >.
+    ├── ...
+    ├── test                    # Test files (alternatively `spec` or `tests`)
+    │   ├── benchmarks          # Load and stress tests
+    │   ├── integration         # End-to-end, integration tests (alternatively `e2e`)
+    │   └── unit                # Unit tests
+    └── ...
+   
    >   Data
    >   ├── Sample_1
    >   │   ├── sample1_image.nrrd
