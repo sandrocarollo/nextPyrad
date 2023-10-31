@@ -2,3 +2,4 @@ work
 .nextflow*
 data/Test/Testlauf_014
 results/klinik
+results/pipeline*
