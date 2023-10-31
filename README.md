@@ -45,7 +45,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 5. Start running your own analysis!
 
-   > In order to do so you should keep your data in a certain folder structure like this one:
+   In order to do so you should keep your data in a certain folder structure like this one:
    ```bash
       Data
       ├── Sample_1
