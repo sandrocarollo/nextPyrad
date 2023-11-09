@@ -1,5 +1,5 @@
 work
-.gitattribute
+.gitattributes
 .nextflow*
 data/Test/Testlauf_014
 results/klinik
