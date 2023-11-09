@@ -4,3 +4,7 @@ work
 data/Test/Testlauf_014
 results/klinik
 results/pipeline*
+subworkflow/local
+modules/local/samplesheet_check.nf
+docs
+bin/check*
