@@ -20,8 +20,8 @@ process MERGE{
     do
         sed -i '1d' \$i
     done
-    echo \$HEADER > NSCLC_features_results.csv
-    find . -maxdepth 1 -iname '*.csv' -not -name 'NSCLC_features_results.csv' -exec cat {} + >> NSCLC_features_results.csv
+    echo \$HEADER > Radiomics_features_results.csv
+    find . -maxdepth 1 -iname '*.csv' -not -name 'Radiomics_features_results.csv' -exec cat {} + >> Radiomics_features_results.csv
     """
 
 }
