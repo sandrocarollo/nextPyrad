@@ -1,3 +1,0 @@
-* linguist-vendored
-*.nf linguist-vendored=false
-*.py linguist-vendored=false
